@@ -1,2 +1,5 @@
-# fonsisnet-sdd-100-
-Nombre: fonsisnet-sdd-100 Visibilidad: privada. Rama principal: main. Rama de trabajo: feature/t11-t12-review. Separación: repositorio independiente, sin conexión con inversion-market-radar. Producción: sin despliegues ni publicaciones.
+# fonsisnet-sdd-100
+Guion y estrategia Investigación Marca Fonsisnet
+Storyboard Generación IA Voz y audio
+Montaje Control jurídico Calidad y publicación
+9 equipos × 10 agentes = 90 agentes, más el director y 9 coordinadores: 100 en total.
