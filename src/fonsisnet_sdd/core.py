@@ -6,11 +6,12 @@ Passing these checks does NOT authorize use of unverified assets or legal claims
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
 import math
 import re
 import zipfile
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -75,6 +76,8 @@ def validate_script(script: dict) -> list[str]:
         scenes = []
     prev_end = 0.0
     seen: set[str] = set()
+    # No empty lead-in, interior gaps or uncovered ending; tiny float drift tolerated.
+    tolerance = 1e-6
     for index, scene in enumerate(scenes, start=1):
         if not isinstance(scene, dict):
             errors.append(f"Escena {index}: objeto inválido")
@@ -95,14 +98,18 @@ def validate_script(script: dict) -> list[str]:
         else:
             if start < 0 or end <= start:
                 errors.append(f"Escena {index}: intervalo inválido")
-            if start < prev_end:
+            if start < prev_end - tolerance:
                 errors.append(f"Escena {index}: solapamiento o desorden")
-            if end > duration:
+            elif start > prev_end + tolerance:
+                errors.append(f"Escena {index}: hueco sin cubrir en la línea de tiempo")
+            if end > duration + tolerance:
                 errors.append(f"Escena {index}: excede duración total")
             prev_end = end
         claims = scene.get("claims")
         if not isinstance(claims, list) or not all(_text(c) for c in claims):
             errors.append(f"Escena {index}: claims debe ser una lista de texto")
+    if scenes and not math.isclose(prev_end, duration, abs_tol=tolerance):
+        errors.append("El guion no cubre el final de la duración declarada")
     if script.get("human_review") is not True:
         errors.append("La revisión humana debe estar activada")
     return errors
@@ -139,30 +146,108 @@ def check_claims(script: dict) -> list[dict]:
     return findings
 
 
-def register_asset(asset: dict) -> list[str]:
+def _validate_rights_evidence(asset: dict, evidence_root: str | Path | None) -> list[str]:
+    """Verify presence/integrity of a LOCAL rights document, not legal sufficiency.
+
+    A caller-supplied approval is an attestation, not independent proof. Never
+    auto-approve a missing document; evidence belongs outside this public repo.
+    """
+    evidence = asset.get("rights_evidence")
+    if not isinstance(evidence, dict):
+        return ["Derechos: falta rights_evidence con prueba documental y revisión humana"]
+    errors: list[str] = []
+    for field in ("file", "sha256", "rights_holder", "reviewed_by", "reviewed_at"):
+        if not _text(evidence.get(field)) or evidence.get(field) == PENDING:
+            errors.append(f"Derechos: falta {field}")
+    if evidence.get("human_approved") is not True:
+        errors.append("Derechos: falta aprobación humana explícita")
+    reviewed_at = evidence.get("reviewed_at")
+    if _text(reviewed_at) and reviewed_at != PENDING:
+        try:
+            when = datetime.fromisoformat(reviewed_at.replace("Z", "+00:00"))
+            if when.tzinfo is None or when.utcoffset() is None:
+                raise ValueError("zona horaria ausente")
+            if when > datetime.now(timezone.utc).astimezone(when.tzinfo):
+                raise ValueError("fecha futura")
+        except (ValueError, TypeError, OverflowError):
+            errors.append("Derechos: reviewed_at debe ser fecha ISO-8601 con zona horaria, no futura")
+    valid_until = evidence.get("valid_until")
+    if valid_until is not None:
+        try:
+            if not isinstance(valid_until, str) or date.fromisoformat(valid_until) < datetime.now(timezone.utc).date():
+                raise ValueError("caducado")
+        except (ValueError, TypeError):
+            errors.append("Derechos: permiso caducado o valid_until inválido")
+    if evidence_root is None:
+        errors.append("Derechos: indicar directorio local de evidencias; no se verifican declaraciones sin archivo")
+        return errors
+    rel = evidence.get("file")
+    if not _text(rel) or rel == PENDING:
+        return errors
+    if "\\" in rel or PurePosixPath(rel).is_absolute() or any(seg in ("", ".", "..") for seg in rel.split("/")):
+        errors.append("Derechos: ruta documental inválida o insegura")
+        return errors
+    try:
+        root = Path(evidence_root).resolve(strict=True)
+        candidate = root.joinpath(*rel.split("/"))
+        resolved = candidate.resolve(strict=True)
+        if not root.is_dir() or not resolved.is_relative_to(root) or not candidate.is_file():
+            raise ValueError("evidencia fuera del directorio permitido")
+        # No links anywhere between the evidence root and the file.
+        cursor = root
+        for segment in rel.split("/"):
+            cursor = cursor / segment
+            if cursor.is_symlink():
+                raise ValueError("evidencia mediante enlace simbólico")
+        if resolved.stat().st_size == 0 or resolved.stat().st_size > 10 * 1024 * 1024:
+            raise ValueError("evidencia vacía o demasiado grande")
+        expected = evidence.get("sha256")
+        if not isinstance(expected, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", expected):
+            raise ValueError("SHA-256 documental inválido")
+        digest = hashlib.sha256()
+        total = 0
+        with candidate.open("rb") as src:
+            for chunk in iter(lambda: src.read(65536), b""):
+                total += len(chunk)
+                if total > 10 * 1024 * 1024:
+                    raise ValueError("evidencia demasiado grande")
+                digest.update(chunk)
+        if not hmac.compare_digest(digest.hexdigest(), expected.lower()):
+            raise ValueError("SHA-256 documental distinto del archivo")
+    except (OSError, ValueError, RuntimeError) as exc:
+        errors.append(f"Derechos: evidencia documental no válida ({exc})")
+    return errors
+
+
+def register_asset(asset: dict, evidence_root: str | Path | None = None) -> list[str]:
     if not isinstance(asset, dict):
         return ["Activo: se esperaba un objeto JSON"]
     errors: list[str] = []
     for key in ("asset_id", "kind", "source", "license", "permission_status"):
-        if not _text(asset.get(key)):
+        if not _text(asset.get(key)) or asset.get(key) == PENDING:
             errors.append(f"Activo: falta {key}")
-    if asset.get("permission_status") not in RIGHTS:
+    if not isinstance(asset.get("permission_status"), str) or asset.get("permission_status") not in RIGHTS:
         errors.append("Activo bloqueado: permiso no confirmado")
-    if asset.get("license") in ("unknown", "", None, PENDING):
-        errors.append("Activo bloqueado: licencia desconocida")
+    if isinstance(asset.get("license"), str) and asset["license"].strip().casefold() in (
+        "unknown", "claimed by user", "unverified", "pending", "desconocida"
+    ):
+        errors.append("Activo bloqueado: licencia no acreditada")
     if not _finite_number(asset.get("cost_eur")) or asset.get("cost_eur") != 0:
         errors.append("Activo bloqueado: coste cero explícito obligatorio")
+    errors.extend(_validate_rights_evidence(asset, evidence_root))
     return errors
 
 
-def validate_audio_package(audio: dict) -> list[str]:
+def validate_audio_package(audio: dict, evidence_root: str | Path | None = None) -> list[str]:
     if not isinstance(audio, dict):
         return ["Audio: se esperaba un objeto JSON"]
     errors: list[str] = []
     for key in ("voice", "music"):
         item = audio.get(key)
-        if not isinstance(item, dict) or not _text(item.get("license")) or item.get("license") in ("unknown", PENDING) or item.get("permission_status") not in RIGHTS:
-            errors.append(f"{key}: derechos/licencia no verificados")
+        if not isinstance(item, dict):
+            errors.append(f"{key}: se esperaba un activo con derechos y coste cero")
+            continue
+        errors.extend(f"{key}: {problem}" for problem in register_asset(item, evidence_root))
     captions = audio.get("captions")
     if not isinstance(captions, dict) or not _text(captions.get("language")):
         errors.append("Subtítulos: idioma no indicado")
@@ -190,11 +275,21 @@ def qa_checklist(video: dict) -> dict:
 
 
 def build_review_package(project_dir: str | Path, output_zip: str | Path, files: list[str]) -> dict:
-    """Make a review-only ZIP. Reject absolute/traversal, links and reserved names."""
-    root = Path(project_dir).resolve()
-    out = Path(output_zip).resolve()
+    """Create a review-only ZIP *inside* project, never replace an existing file.
+
+    The destination directory must already exist. Opening with ``xb`` is
+    exclusive: symlinks/existing files cannot be overwritten accidentally.
+    """
+    root = Path(project_dir).resolve(strict=True)
+    output_path = Path(output_zip).absolute()
+    out = output_path.resolve(strict=False)
     if not root.is_dir() or not isinstance(files, list) or not files:
         raise ValueError("Carpeta de proyecto o lista de archivos inválida")
+    if (out == root or not out.is_relative_to(root) or
+            not output_path.parent.is_dir() or not output_path.name.endswith(".zip")):
+        raise ValueError("El ZIP debe generarse en una carpeta existente dentro del proyecto")
+    if output_path.is_symlink():
+        raise ValueError("No se permite ZIP de salida mediante enlace simbólico")
     manifest = []
     checked = []
     seen: set[str] = set()
@@ -212,14 +307,21 @@ def build_review_package(project_dir: str | Path, output_zip: str | Path, files:
             raise ValueError(f"Ruta fuera de proyecto, vínculo o archivo inexistente: {rel}")
         seen.add(rel)
         checked.append((rel, path))
-    out.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(out, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-        for rel, path in checked:
-            data = path.read_bytes()
-            archive.writestr(rel, data)
-            manifest.append({"path": rel, "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)})
-        archive.writestr("REVIEW_MANIFEST.json", json.dumps({
-            "created_at": datetime.now(timezone.utc).isoformat(),
-            "files": manifest, "approval": "NOT_APPROVED_FOR_PUBLICATION",
-        }, indent=2, ensure_ascii=False))
+    created = False
+    try:
+        with output_path.open("xb") as destination:
+            created = True
+            with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+                for rel, path in checked:
+                    data = path.read_bytes()
+                    archive.writestr(rel, data)
+                    manifest.append({"path": rel, "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)})
+                archive.writestr("REVIEW_MANIFEST.json", json.dumps({
+                    "created_at": datetime.now(timezone.utc).isoformat(),
+                    "files": manifest, "approval": "NOT_APPROVED_FOR_PUBLICATION",
+                }, indent=2, ensure_ascii=False))
+    except Exception:
+        if created:
+            output_path.unlink(missing_ok=True)
+        raise
     return {"output": str(out), "files": len(manifest), "sha256": hashlib.sha256(out.read_bytes()).hexdigest()}

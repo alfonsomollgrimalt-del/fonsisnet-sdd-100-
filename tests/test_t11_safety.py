@@ -48,7 +48,7 @@ class T11SafetyTests(unittest.TestCase):
         item = {'asset_id': 'a', 'kind': 'image', 'source': 'self', 'license': 'CC0', 'permission_status': 'public_domain'}
         self.assertTrue(register_asset(item))
         item['cost_eur'] = 0
-        self.assertEqual(register_asset(item), [])
+        self.assertTrue(register_asset(item))  # missing rights evidence is now blocked
         item['cost_eur'] = False
         self.assertTrue(register_asset(item))
 

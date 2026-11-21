@@ -1,6 +1,6 @@
 {
   "project": "FONSISNET SDD-100",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "independent": true,
   "default_budget_eur": 0,
   "paid_services_allowed": false,
@@ -28,5 +28,5 @@
   ],
   "remote_repository": "alfonsomollgrimalt-del/fonsisnet-sdd-100-",
   "remote_repository_visibility": "public",
-  "remote_code_uploaded": false
+  "remote_code_uploaded": true
 }

@@ -1,4 +1,4 @@
-import json, sys, tempfile, unittest
+import hashlib, json, sys, tempfile, unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
@@ -19,7 +19,7 @@ class PipelineTests(unittest.TestCase):
   self.assertEqual(finding['status'],'BLOCKED_REVIEW_REQUIRED'); self.assertFalse(finding['human_approved'])
  def test_asset_requires_rights_and_zero_cost(self):
   self.assertTrue(register_asset({'asset_id':'a','kind':'music','source':'x','license':'unknown','permission_status':'unknown','cost_eur':0}))
-  self.assertEqual(register_asset({'asset_id':'a','kind':'music','source':'x','license':'CC0','permission_status':'public_domain','cost_eur':0}),[])
+  self.assertTrue(register_asset({'asset_id':'a','kind':'music','source':'x','license':'CC0','permission_status':'public_domain','cost_eur':0}))  # missing evidence must fail closed
  def test_audio_requires_licenses_and_caption_accessibility(self):
   a={'voice':{'license':'unknown','permission_status':'unknown'},'music':{'license':'CC0','permission_status':'public_domain'},'captions':{'language':'es-ES','contrast_checked':True}}
   self.assertTrue(validate_audio_package(a))
