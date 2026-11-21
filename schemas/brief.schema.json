@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://fonsisnet.local/schemas/brief.schema.json",
+  "title": "FONSISNET Video Brief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project",
+    "objective",
+    "audience",
+    "duration_seconds",
+    "aspect_ratio",
+    "language",
+    "cta"
+  ],
+  "properties": {
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "audience": {
+      "type": "string",
+      "minLength": 1
+    },
+    "duration_seconds": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 60
+    },
+    "aspect_ratio": {
+      "enum": [
+        "9:16",
+        "16:9",
+        "1:1"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "brand_style": {
+      "type": "string"
+    },
+    "cta": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contact_details": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "contact_details_confirmed": {
+      "type": "boolean"
+    }
+  }
+}

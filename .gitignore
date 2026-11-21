@@ -1,0 +1,21 @@
+# Generated files; never commit credentials or personal client data.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.log
+*.mp4
+*.mov
+*.wav
+*.mp3
+*.zip
+.DS_Store
+Thumbs.db
+build/
+dist/
