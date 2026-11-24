@@ -1,0 +1,32 @@
+{
+  "project": "FONSISNET SDD-100",
+  "version": "0.3.1",
+  "independent": true,
+  "default_budget_eur": 0,
+  "paid_services_allowed": false,
+  "production_deploy_allowed": false,
+  "human_approval_required": true,
+  "unknown_data_marker": "[PENDIENTE DE COMPROBAR]",
+  "prohibited_inventions": [
+    "contact_details",
+    "tax_savings",
+    "guarantees",
+    "testimonials",
+    "client_data"
+  ],
+  "privacy": {
+    "upload_personal_client_data": false,
+    "secrets_in_repo": false
+  },
+  "release_gates": [
+    "G0",
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5"
+  ],
+  "remote_repository": "alfonsomollgrimalt-del/fonsisnet-sdd-100-",
+  "remote_repository_visibility": "public",
+  "remote_code_uploaded": true
+}

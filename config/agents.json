@@ -1,0 +1,888 @@
+{
+  "model": "logical-agents",
+  "execution": "on-demand",
+  "simultaneous_model_count": 0,
+  "topology": "1 director + 9 coordinators + 90 specialists",
+  "agents": [
+    {
+      "id": "AG-001",
+      "role": "director",
+      "team": "governance",
+      "name": "Director SDD",
+      "mission": "Coordinar el flujo completo, resolver dependencias y exigir las puertas de calidad."
+    },
+    {
+      "id": "AG-002",
+      "role": "coordinator",
+      "team": "strategy",
+      "name": "Coordinador Estrategia y brief",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA."
+    },
+    {
+      "id": "AG-003",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 01",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-004",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 02",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-005",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 03",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-006",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 04",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-007",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 05",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-008",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 06",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-009",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 07",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-010",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 08",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-011",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 09",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-012",
+      "role": "specialist",
+      "team": "strategy",
+      "name": "Especialista Estrategia y brief 10",
+      "mission": "Definir objetivo, audiencia, propuesta y CTA.",
+      "activation": "on-demand",
+      "reports_to": "AG-002"
+    },
+    {
+      "id": "AG-013",
+      "role": "coordinator",
+      "team": "research",
+      "name": "Coordinador Investigación y fuentes",
+      "mission": "Investigar contexto y registrar fuentes verificables."
+    },
+    {
+      "id": "AG-014",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 01",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-015",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 02",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-016",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 03",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-017",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 04",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-018",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 05",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-019",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 06",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-020",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 07",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-021",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 08",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-022",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 09",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-023",
+      "role": "specialist",
+      "team": "research",
+      "name": "Especialista Investigación y fuentes 10",
+      "mission": "Investigar contexto y registrar fuentes verificables.",
+      "activation": "on-demand",
+      "reports_to": "AG-013"
+    },
+    {
+      "id": "AG-024",
+      "role": "coordinator",
+      "team": "brand",
+      "name": "Coordinador Marca y creatividad",
+      "mission": "Mantener identidad visual y tono de FONSISNET."
+    },
+    {
+      "id": "AG-025",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 01",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-026",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 02",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-027",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 03",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-028",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 04",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-029",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 05",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-030",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 06",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-031",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 07",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-032",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 08",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-033",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 09",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-034",
+      "role": "specialist",
+      "team": "brand",
+      "name": "Especialista Marca y creatividad 10",
+      "mission": "Mantener identidad visual y tono de FONSISNET.",
+      "activation": "on-demand",
+      "reports_to": "AG-024"
+    },
+    {
+      "id": "AG-035",
+      "role": "coordinator",
+      "team": "script",
+      "name": "Coordinador Guion y storyboard",
+      "mission": "Crear guion, escenas, tiempos y locución."
+    },
+    {
+      "id": "AG-036",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 01",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-037",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 02",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-038",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 03",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-039",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 04",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-040",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 05",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-041",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 06",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-042",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 07",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-043",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 08",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-044",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 09",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-045",
+      "role": "specialist",
+      "team": "script",
+      "name": "Especialista Guion y storyboard 10",
+      "mission": "Crear guion, escenas, tiempos y locución.",
+      "activation": "on-demand",
+      "reports_to": "AG-035"
+    },
+    {
+      "id": "AG-046",
+      "role": "coordinator",
+      "team": "generation",
+      "name": "Coordinador Generación audiovisual",
+      "mission": "Proponer y producir recursos con herramientas permitidas."
+    },
+    {
+      "id": "AG-047",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 01",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-048",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 02",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-049",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 03",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-050",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 04",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-051",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 05",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-052",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 06",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-053",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 07",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-054",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 08",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-055",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 09",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-056",
+      "role": "specialist",
+      "team": "generation",
+      "name": "Especialista Generación audiovisual 10",
+      "mission": "Proponer y producir recursos con herramientas permitidas.",
+      "activation": "on-demand",
+      "reports_to": "AG-046"
+    },
+    {
+      "id": "AG-057",
+      "role": "coordinator",
+      "team": "audio",
+      "name": "Coordinador Voz y sonido",
+      "mission": "Gestionar locución, música, mezcla y derechos."
+    },
+    {
+      "id": "AG-058",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 01",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-059",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 02",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-060",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 03",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-061",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 04",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-062",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 05",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-063",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 06",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-064",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 07",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-065",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 08",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-066",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 09",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-067",
+      "role": "specialist",
+      "team": "audio",
+      "name": "Especialista Voz y sonido 10",
+      "mission": "Gestionar locución, música, mezcla y derechos.",
+      "activation": "on-demand",
+      "reports_to": "AG-057"
+    },
+    {
+      "id": "AG-068",
+      "role": "coordinator",
+      "team": "editing",
+      "name": "Coordinador Montaje y subtítulos",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular."
+    },
+    {
+      "id": "AG-069",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 01",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-070",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 02",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-071",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 03",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-072",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 04",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-073",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 05",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-074",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 06",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-075",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 07",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-076",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 08",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-077",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 09",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-078",
+      "role": "specialist",
+      "team": "editing",
+      "name": "Especialista Montaje y subtítulos 10",
+      "mission": "Montar, sincronizar, adaptar formatos y subtitular.",
+      "activation": "on-demand",
+      "reports_to": "AG-068"
+    },
+    {
+      "id": "AG-079",
+      "role": "coordinator",
+      "team": "legal",
+      "name": "Coordinador Control legal y fiscal",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento."
+    },
+    {
+      "id": "AG-080",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 01",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-081",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 02",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-082",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 03",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-083",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 04",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-084",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 05",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-085",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 06",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-086",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 07",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-087",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 08",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-088",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 09",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-089",
+      "role": "specialist",
+      "team": "legal",
+      "name": "Especialista Control legal y fiscal 10",
+      "mission": "Verificar afirmaciones, riesgos y cumplimiento.",
+      "activation": "on-demand",
+      "reports_to": "AG-079"
+    },
+    {
+      "id": "AG-090",
+      "role": "coordinator",
+      "team": "quality",
+      "name": "Coordinador Calidad y release",
+      "mission": "Ejecutar QA, evidencias y control de publicación."
+    },
+    {
+      "id": "AG-091",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 01",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-092",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 02",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-093",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 03",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-094",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 04",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-095",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 05",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-096",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 06",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-097",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 07",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-098",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 08",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-099",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 09",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    },
+    {
+      "id": "AG-100",
+      "role": "specialist",
+      "team": "quality",
+      "name": "Especialista Calidad y release 10",
+      "mission": "Ejecutar QA, evidencias y control de publicación.",
+      "activation": "on-demand",
+      "reports_to": "AG-090"
+    }
+  ]
+}
